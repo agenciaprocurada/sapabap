@@ -3,6 +3,26 @@
    Site estático em HTML + CSS (sem JS, sem React).
    ========================================================= */
 
+/* Fontes locais (variáveis — um único arquivo cobre todos os pesos).
+   Subset: latin (U+0000-00FF cobre acentos pt-BR: ã õ ç á é í ó ú etc.) */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('assets/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --bg-deep: #060d1a;
   --bg-dark: #0a1628;
@@ -2115,6 +2135,156 @@ section {
 .footer-stripe {
   height: 4px;
   background: linear-gradient(90deg, #050b1a 0%, #0a1530 50%, #1e3a8a 100%)
+}
+
+/* =========================
+   PÁGINA OBRIGADO (/obrigado-sapabap)
+   ========================= */
+.obrigado {
+  position: relative;
+  background: linear-gradient(180deg, #060d1a 0%, #0a1530 70%, #0a1628 100%);
+  color: #fff;
+  padding: 80px 0 100px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.obrigado::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59, 130, 246, .22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(244, 183, 64, .08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.obrigado__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.obrigado__icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #3ed68a 0%, #1ea562 100%);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 8px rgba(62, 214, 138, .12), 0 0 40px rgba(62, 214, 138, .45);
+}
+
+.obrigado__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  margin: 0 0 18px;
+  color: #fff;
+}
+
+.obrigado__title .accent {
+  color: #fbbf24;
+}
+
+.obrigado__sub {
+  color: rgba(255, 255, 255, .78);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 40px;
+}
+
+.obrigado__card {
+  background: rgba(255, 255, 255, .035);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 20px;
+  padding: 38px 34px;
+  margin: 0 auto 36px;
+  text-align: left;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, .6);
+}
+
+.obrigado__cardtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  margin: 16px 0 12px;
+  color: #fff;
+}
+
+.obrigado__cardtext {
+  color: rgba(255, 255, 255, .75);
+  line-height: 1.65;
+  margin: 0 0 26px;
+}
+
+.obrigado__cardtext strong {
+  color: #fff;
+}
+
+.obrigado__cta {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.obrigado__steps {
+  text-align: left;
+  background: rgba(255, 255, 255, .025);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin: 0 auto 36px;
+}
+
+.obrigado__stepstitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: .01em;
+  margin: 0 0 14px;
+  color: #fff;
+}
+
+.obrigado__steps ol {
+  margin: 0;
+  padding-left: 22px;
+  color: rgba(255, 255, 255, .78);
+  line-height: 1.6;
+}
+
+.obrigado__steps li+li {
+  margin-top: 12px;
+}
+
+.obrigado__steps strong {
+  color: #fff;
+}
+
+.obrigado__support p {
+  color: rgba(255, 255, 255, .65);
+  margin: 0 0 16px;
+  font-size: .98rem;
+}
+
+@media (max-width: 600px) {
+  .obrigado {
+    padding: 60px 0 80px
+  }
+
+  .obrigado__card {
+    padding: 28px 22px
+  }
+
+  .obrigado__steps {
+    padding: 22px 24px
+  }
 }
 
 /* =========================

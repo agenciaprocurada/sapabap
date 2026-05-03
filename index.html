@@ -6,27 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Curso Prático SAP ABAP — Aline Explica SAP</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <!-- Fontes self-hosted (subset latin, variáveis — todos os pesos em 1 arquivo cada) -->
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Meta Pixel Code -->
+  <!-- Meta Pixel — carrega só após primeira interação do usuário (scroll/click/touch/mouse) ou 4s -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '564676471958688');
-    fbq('init', '940802978658042');
-    fbq('track', 'PageView');
+    (function () {
+      var loaded = false;
+      function loadPixel() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function (ev) { window.removeEventListener(ev, loadPixel, opts); });
+        clearTimeout(fallback);
+        !function (f, b, e, v, n, t, s) {
+          if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          };
+          if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+          n.queue = []; t = b.createElement(e); t.async = !0;
+          t.src = v; s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s)
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '564676471958688');
+        fbq('init', '940802978658042');
+        fbq('track', 'PageView');
+      }
+      var events = ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'];
+      var opts = { once: true, passive: true, capture: true };
+      events.forEach(function (ev) { window.addEventListener(ev, loadPixel, opts); });
+      var fallback = setTimeout(loadPixel, 4000);
+    })();
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
@@ -45,7 +57,7 @@
     <div class="container">
       <div class="hero__topbar">
         <div class="hero__brand">
-          <img src="assets/logo-sap-abap.webp" alt="Curso Prático SAP ABAP" />
+          <img src="assets/logo-sap-abap.webp" alt="Curso Prático SAP ABAP" width="180" height="180" decoding="async" />
         </div>
         <div class="hero__badge">
           <span class="hero__badge-dot"></span>
