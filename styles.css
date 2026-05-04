@@ -969,9 +969,16 @@ section {
 }
 
 .depoimentos__grid {
+  position: relative
+}
+
+/* Track interno: grid de 5 colunas no desktop, vira flex marquee no mobile */
+.depoimentos__track {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  margin: 0
 }
 
 .depoimentos__card {
@@ -981,7 +988,8 @@ section {
   padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 18px
+  gap: 18px;
+  margin: 0
 }
 
 /* Card-screenshot: cada depoimento é uma imagem real (Udemy reviews) */
@@ -992,7 +1000,8 @@ section {
   overflow: hidden;
   border-color: rgba(255, 255, 255, .12);
   box-shadow: 0 14px 36px -18px rgba(0, 0, 0, .55);
-  transition: transform .25s ease, box-shadow .25s ease
+  transition: transform .25s ease, box-shadow .25s ease;
+  aspect-ratio: 1 / 1
 }
 
 .depoimentos__card--img:hover {
@@ -1002,15 +1011,14 @@ section {
 
 .depoimentos__card--img img {
   width: 100%;
-  height: auto;
-  display: block
+  height: 100%;
+  display: block;
+  object-fit: cover
 }
 
-.depoimentos__card--wide {
-  grid-column: 1 / -1;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto
+/* Duplicatas do marquee — escondidas no desktop, visíveis apenas no slide mobile */
+.depoimentos__card[aria-hidden="true"] {
+  display: none
 }
 
 /* =========================
@@ -1031,10 +1039,10 @@ section {
 .paraquem__title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
-  font-size: 47px;
+  font-size: clamp(1.85rem, 4.4vw, 2.95rem);
   letter-spacing: -.025em;
   margin: 0 0 14px;
-  line-height: 1.06
+  line-height: 1.1
 }
 
 .paraquem__sub {
@@ -2244,7 +2252,6 @@ section {
     padding: 0 20px
   }
 
-  .depoimentos__grid,
   .paraquem__grid,
   .preco__stack,
   .bonus__head,
@@ -2253,12 +2260,66 @@ section {
     grid-template-columns: 1fr !important
   }
 
-  /* Depoimentos: cards quadrados centralizados, com largura uniforme */
-  .depoimentos__card--img,
-  .depoimentos__card--wide {
-    max-width: 440px;
-    margin-left: auto;
-    margin-right: auto
+  /* Depoimentos no mobile: marquee horizontal contínuo */
+  .depoimentos__grid {
+    overflow: hidden;
+    margin-left: -20px;
+    margin-right: -20px;
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0,
+        #000 24px,
+        #000 calc(100% - 24px),
+        transparent 100%);
+    mask-image: linear-gradient(to right,
+        transparent 0,
+        #000 24px,
+        #000 calc(100% - 24px),
+        transparent 100%)
+  }
+
+  .depoimentos__track {
+    display: flex;
+    grid-template-columns: none;
+    gap: 16px;
+    width: max-content;
+    animation: depoimentos-marquee 45s linear infinite
+  }
+
+  .depoimentos__card--img {
+    flex: 0 0 240px;
+    width: 240px
+  }
+
+  .depoimentos__card[aria-hidden="true"] {
+    display: block
+  }
+
+  /* Pausa o marquee se o usuário tocar/segurar */
+  .depoimentos__grid:hover .depoimentos__track,
+  .depoimentos__grid:active .depoimentos__track {
+    animation-play-state: paused
+  }
+}
+
+@keyframes depoimentos-marquee {
+  from {
+    transform: translateX(0)
+  }
+
+  to {
+    /* -50% leva 5 cards + 4.5 gaps; ajustamos +metade do gap (8px) para fechar o loop sem salto */
+    transform: translateX(calc(-50% - 8px))
+  }
+}
+
+/* Reduce motion: sem animação, vira scroll horizontal manual */
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .depoimentos__grid {
+    overflow-x: auto
+  }
+
+  .depoimentos__track {
+    animation: none
   }
 }
 
