@@ -65,6 +65,13 @@ body {
   -webkit-font-smoothing: antialiased
 }
 
+/* Trava rolagem horizontal e impede saltos laterais em qualquer página */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden
+}
+
 img {
   max-width: 100%;
   display: block
@@ -2244,6 +2251,14 @@ section {
   .bonus__grid,
   .sobre__inner {
     grid-template-columns: 1fr !important
+  }
+
+  /* Depoimentos: cards quadrados centralizados, com largura uniforme */
+  .depoimentos__card--img,
+  .depoimentos__card--wide {
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto
   }
 }
 
