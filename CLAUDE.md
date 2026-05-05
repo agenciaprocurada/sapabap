@@ -89,7 +89,7 @@ sapabap/
 9. `.garantia` — selo de 7 dias
 10. `.faq` — accordion com 13 perguntas (HTML `<details>`)
 11. `.sobre` — bio da Aline + stats
-12. `.footer-cta` + `.footer-bar` + `.footer-stripe`
+12. `.footer-bar` + `.footer-stripe`
 
 ### Convenções
 

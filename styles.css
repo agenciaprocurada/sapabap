@@ -2034,28 +2034,8 @@ section {
 }
 
 /* =========================
-   FOOTER CTA + BARRA
+   FOOTER BARRA
    ========================= */
-.footer-cta {
-  background: #0a1530;
-  color: #fff;
-  padding: 70px 0;
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, .08)
-}
-
-.footer-cta h3 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-  margin: 0 0 12px
-}
-
-.footer-cta p {
-  color: rgba(255, 255, 255, .7);
-  margin: 0 0 24px
-}
-
 .footer-bar {
   background: linear-gradient(180deg, #0a1628 0%, #0a1530 100%);
   color: rgba(255, 255, 255, .7);
